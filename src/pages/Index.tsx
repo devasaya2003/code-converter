@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useEffect } from 'react';
 import { ChevronRight, Copy, ArrowLeft, ArrowRight, Check, Code } from 'lucide-react';
 import { ProgrammingLanguage } from '@/types';
@@ -11,6 +10,7 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { UserNav } from '@/components/UserNav';
 import { useAuth } from '@/context/AuthContext';
+import { convertCode } from '@/lib/geminiUtils';
 
 const Index = () => {
   const { user } = useAuth();
@@ -60,15 +60,11 @@ const Index = () => {
     
     // In a real app, we would call an API here, for now we'll simulate it
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // For demo purposes, we'll just wrap the original code with a comment
-      // In real implementation, this would be replaced with API call to Gemini or OpenAI
-      const result = `// Converted from ${getLanguageLabel(effectiveSourceLanguage)} to ${getLanguageLabel(targetLanguage)}
-// Note: This is a demonstration. In a real app, this would be actual converted code.
-
-${sourceCode}`;
+      const result = await convertCode(
+        sourceCode,
+        getLanguageLabel(effectiveSourceLanguage),
+        getLanguageLabel(targetLanguage)
+      );
       
       setConvertedCode(result);
       toast.success(`Successfully converted to ${getLanguageLabel(targetLanguage)}`);
