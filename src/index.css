@@ -1,0 +1,94 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    
+    --editor-bg: 220 20% 10%;
+    --editor-border: 220 20% 20%;
+    --editor-highlight: 217.2 91.2% 59.8%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply backdrop-blur-lg bg-black/30 rounded-xl border border-white/10 shadow-glass;
+  }
+  
+  .rainbow-gradient {
+    background: linear-gradient(90deg, 
+      rgba(255, 0, 0, 0.2),
+      rgba(255, 154, 0, 0.2),
+      rgba(208, 222, 33, 0.2),
+      rgba(79, 220, 74, 0.2),
+      rgba(63, 218, 216, 0.2),
+      rgba(47, 201, 226, 0.2),
+      rgba(28, 127, 238, 0.2),
+      rgba(95, 21, 242, 0.2),
+      rgba(186, 12, 248, 0.2),
+      rgba(251, 7, 217, 0.2),
+      rgba(255, 0, 0, 0.2)
+    );
+    background-size: 200% 200%;
+  }
+  
+  .code-editor {
+    @apply font-mono text-sm leading-relaxed rounded-lg w-full h-full resize-none bg-editor-bg border-none focus:outline-none focus:ring-2 focus:ring-editor-highlight transition-all duration-300;
+    min-height: 300px;
+    tab-size: 2;
+  }
+
+  .code-line-numbers {
+    @apply font-mono text-sm leading-relaxed;
+    min-width: 2rem;
+    white-space: pre;
+    line-height: inherit;
+  }
+
+  /* Dark dropdown styling */
+  [data-radix-popper-content-wrapper] {
+    @apply z-50;
+  }
+}
